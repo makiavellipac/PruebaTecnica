@@ -10,3 +10,8 @@ export type ContexState = {
   setLogin: (value:String,name:String) => void;
   clearLogin:()=>void
 }
+
+export type user ={
+  userName: String,
+  password: String
+}
