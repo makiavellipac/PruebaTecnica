@@ -1,11 +1,23 @@
 import  React,{FC} from 'react';
+import { BrowserRouter as Router, Route, Switch , Redirect } from 'react-router-dom';
+import Home from '../Pages/Home';
+import Upload from '../Pages/Upload';
+import Employes from '../Pages/Employees';
+import RouteProtect from './RouteProtect';
+import Context from './Context';
 
-const App:FC = () =>{
-  return(
-    <p>
-      Hello World
-    </p>
-  )
+const App: FC = () => {
+    return (
+        <Router>
+            <Context>
+                <Switch>
+                    <Route  path='/' component={Home} exact/>
+                        <RouteProtect path='/employes' component={Employes} exact/>
+                        <RouteProtect path='/upload' component={Upload} exact/>
+                    <Route component={() => <Redirect to="/" />} />
+                </Switch>
+            </Context>
+        </Router>
+    )
 }
-
-export default App;
+export default App
