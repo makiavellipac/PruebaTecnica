@@ -1,0 +1,16 @@
+{
+  "name": "prueba",
+  "version": "1.0.0",
+  "description": "Prueba Tecnica de React con Typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "React",
+    "Typescript",
+    "context"
+  ],
+  "author": "makiavelliPac",
+  "license": "ISC"
+}
