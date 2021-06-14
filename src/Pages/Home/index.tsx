@@ -1,4 +1,4 @@
-import React,{FC,ClipboardEvent,useContext,ChangeEvent,useState,FormEvent} from 'react';
+import React,{FC,ClipboardEvent,useContext,ChangeEvent,useState,FormEvent, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -6,6 +6,7 @@ import {Avatar,Button,CssBaseline,TextField,Typography,Container} from '@materia
 
 import { Mycontext } from '../../Components/Context';
 import Myservice from '../../Services/loginServices';
+import  { verifyToken } from '../../Helpers/loginHelpers';
 
 const { data } = require('../../Data/FakeLogin.json');
 import { user } from '../../Types/types';
@@ -46,6 +47,19 @@ const index: FC = () => {
      }
   }
 
+
+    useEffect(()=>{
+      const token=localStorage.getItem('token')
+        if(token){
+          verifyToken(token)
+            .then(({userName})=>{
+              if(userName){
+                setUserName(userName)
+                history.push('/employes')
+              }
+          })
+      }
+    },[])
   
   const classes = LoginStyles();
   return(
