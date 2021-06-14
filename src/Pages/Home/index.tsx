@@ -5,6 +5,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Avatar,Button,CssBaseline,TextField,Typography,Container} from '@material-ui/core';
 
 import { Mycontext } from '../../Components/Context';
+import Myservice from '../../Services/loginServices';
 
 const { data } = require('../../Data/FakeLogin.json');
 import { user } from '../../Types/types';
@@ -35,6 +36,7 @@ const index: FC = () => {
   const onSubmit = (e: FormEvent)=>{
     if(data.find((use:user)=>use.userName === userName && use.password === password))
      {
+      Myservice.login(userName)
       setUserName(userName)
       history.push('/employes')   
      }
