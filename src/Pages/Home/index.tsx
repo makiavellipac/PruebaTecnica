@@ -1,4 +1,4 @@
-import React,{FC,ClipboardEvent,useContext} from 'react';
+import React,{FC,ClipboardEvent,useContext,ChangeEvent,useState} from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Avatar,Button,CssBaseline,TextField,Typography,Container} from '@material-ui/core';
 
@@ -9,10 +9,20 @@ import LoginStyles from './LoginStyles';
 
 const index: FC = () => {
 
-  const {  } = useContext(Mycontext);
+  const [onpaste,setPaste]= useState(false)
 
+  const { login,setLogin,clearLogin } = useContext(Mycontext);
+  const { userName,password } = login;
   const handlePaste = (e:ClipboardEvent) => {
     alert('No puedes pegar Texto')
+    setPaste(true)
+    clearLogin()
+  }
+
+  const handleChangue = ({currentTarget}:ChangeEvent<HTMLInputElement>)=>{
+    !onpaste?
+    setLogin(currentTarget.value,currentTarget.name):
+    setPaste(false)
   }
 
   
@@ -36,7 +46,9 @@ const index: FC = () => {
             label="User Name"
             name="userName"
             autoFocus
+            value={userName}
             onPaste={handlePaste}
+            onChange={handleChangue}
           />
           <TextField
             variant="outlined"
@@ -48,7 +60,9 @@ const index: FC = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
             onPaste={handlePaste}
+            onChange={handleChangue}
           />
           <Button
             fullWidth
