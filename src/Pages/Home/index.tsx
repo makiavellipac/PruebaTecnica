@@ -1,11 +1,21 @@
-import React,{FC} from 'react';
+import React,{FC,ClipboardEvent,useContext} from 'react';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Avatar,Button,CssBaseline,TextField,Typography,Container} from '@material-ui/core';
+
+import { Mycontext } from '../../Components/Context';
+
 
 import LoginStyles from './LoginStyles';
 
 const index: FC = () => {
 
+  const {  } = useContext(Mycontext);
+
+  const handlePaste = (e:ClipboardEvent) => {
+    alert('No puedes pegar Texto')
+  }
+
+  
   const classes = LoginStyles();
   return(
     <Container component="main" maxWidth="xs">
@@ -26,6 +36,7 @@ const index: FC = () => {
             label="User Name"
             name="userName"
             autoFocus
+            onPaste={handlePaste}
           />
           <TextField
             variant="outlined"
@@ -37,6 +48,7 @@ const index: FC = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onPaste={handlePaste}
           />
           <Button
             fullWidth
