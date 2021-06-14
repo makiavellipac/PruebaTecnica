@@ -1,8 +1,13 @@
-import React,{FC,ClipboardEvent,useContext,ChangeEvent,useState} from 'react';
+import React,{FC,ClipboardEvent,useContext,ChangeEvent,useState,FormEvent} from 'react';
+import {useHistory} from 'react-router-dom';
+
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Avatar,Button,CssBaseline,TextField,Typography,Container} from '@material-ui/core';
 
 import { Mycontext } from '../../Components/Context';
+
+const { data } = require('../../Data/FakeLogin.json');
+import { user } from '../../Types/types';
 
 
 import LoginStyles from './LoginStyles';
@@ -11,8 +16,10 @@ const index: FC = () => {
 
   const [onpaste,setPaste]= useState(false)
 
-  const { login,setLogin,clearLogin } = useContext(Mycontext);
+  const history=useHistory();
+  const { login,setLogin,clearLogin,setUserName } = useContext(Mycontext);
   const { userName,password } = login;
+
   const handlePaste = (e:ClipboardEvent) => {
     alert('No puedes pegar Texto')
     setPaste(true)
@@ -23,6 +30,18 @@ const index: FC = () => {
     !onpaste?
     setLogin(currentTarget.value,currentTarget.name):
     setPaste(false)
+  }
+
+  const onSubmit = (e: FormEvent)=>{
+    if(data.find((use:user)=>use.userName === userName && use.password === password))
+     {
+      setUserName(userName)
+      history.push('/employes')   
+     }
+     else{
+       alert('Usuario o contraseña incorrectos')
+       clearLogin()
+     }
   }
 
   
@@ -69,6 +88,7 @@ const index: FC = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={onSubmit}
           >
             Sign In
           </Button>
