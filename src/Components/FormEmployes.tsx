@@ -1,5 +1,12 @@
-import React from 'react';
-import { TextField, Theme, createStyles, makeStyles, Button } from '@material-ui/core';
+import React, { ChangeEvent, useState } from 'react';
+import { TextField, Theme, createStyles, makeStyles, Button, } from '@material-ui/core';
+
+
+type forms={
+  name:string,
+  last_name:string,
+  birthday:string
+}
 
 const useStyles = makeStyles((theme:Theme)=>
   createStyles({
@@ -16,13 +23,23 @@ const useStyles = makeStyles((theme:Theme)=>
 
 const FormEmployes = () =>{
 
+  const [forms,setForms]=useState<forms>({
+    name:'',
+    last_name:'',
+    birthday:''
+  })
+
+  const handleChangue =({currentTarget}:ChangeEvent<HTMLInputElement>)=>{
+    setForms({...forms,[currentTarget.name]:currentTarget.value})
+  }
+
   const classes=useStyles()
 
   return(
     <form className={classes.container}>
-      <TextField label='Nombre' name='name' variant='outlined' className={classes.textField}/>
-      <TextField label='Apellidos' name='last_name' variant='outlined' className={classes.textField}/>
-      <TextField name='birthday' variant='outlined' type='date' className={classes.textField}/>
+      <TextField label='Nombre' name='name' variant='outlined' className={classes.textField} value={forms.name} onChange={handleChangue}/>
+      <TextField label='Apellidos' name='last_name' variant='outlined' className={classes.textField} value={forms.last_name} onChange={handleChangue}/>
+      <TextField name='birthday' variant='outlined' type='date' className={classes.textField} value={forms.birthday} onChange={handleChangue}/>
       <Button color='primary' variant='contained' className={classes.textField}>Submit</Button>
     </form>
   )
