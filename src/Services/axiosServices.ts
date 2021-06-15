@@ -1,4 +1,3 @@
-import { parseDate } from '@material-ui/data-grid';
 import axios from 'axios';
 import dateParse  from '../Helpers/dateHelpers';
 
@@ -25,6 +24,10 @@ const EMPLOYES_SERVICE={
       {...user,birthday:dateParse(user.birthday)}
     ))
     return parseData;
+  },
+  saveEmployes: async(employ:{},userName:String)=>{
+    const request= await MY_SERVICE.post(`/${userName}`,employ)
+    return request
   }
 }
 
