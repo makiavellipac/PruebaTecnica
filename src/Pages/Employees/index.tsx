@@ -6,6 +6,9 @@ import DataContainer from '../../Components/DataContainer';
 
 import EMPLOYES_SERVICE from '../../Services/axiosServices';
 import InputSearch from '../../Components/InputSearch';
+import FormEmployes from '../../Components/FormEmployes';
+
+import './index.css'
 
 type employ={
   birthday: string
@@ -45,10 +48,15 @@ const index: FC = () => {
   },[])
 
   return(
-    <Fragment>
-      <DataContainer rows={employess}/>
-      <InputSearch value={inputValue} setValue={setInputValue} onChangue={handleChangue}/>
-    </Fragment>
+    <div className='div-container'>
+      <div className='div-container-form'>
+        <DataContainer rows={employess}/>
+      </div>
+      <div className='div-container-forms'>
+        <InputSearch value={inputValue} setValue={setInputValue} onChangue={handleChangue}/>
+        <FormEmployes/>
+      </div>
+    </div>
   )
 }
 
