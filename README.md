@@ -17,6 +17,11 @@ Clona el proyecto en tu computadora y  crea el archivo .env, en el añadiras tus
 
 _Escribe el comando_ **npm start** para iniciar el proyecto, observaras la magia de React.
 
+```
+  UserName: Santiago Gonzalez
+  Password: 1234
+ ```
+
 
 Listo ya podras ocupar el proyecto que lo disfrutes.
 
