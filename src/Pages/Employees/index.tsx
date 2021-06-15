@@ -30,14 +30,13 @@ const index: FC = () => {
     const filteres = employessDefault.filter(({name})=>{
       return name.toLowerCase().includes(inputValue.toLocaleLowerCase())
     })
-    console.log(filteres)
     setEmployess(filteres)
     if(inputValue===''){
       setEmployess(employessDefault)
     }
   }
 
-  useEffect(()=>{
+  const getEmployes = () =>{
     userName!==''?
     EMPLOYES_SERVICE.getEmployes(userName).then((data)=>
     {
@@ -45,6 +44,10 @@ const index: FC = () => {
       setEmployess(data) 
     }
     ):null
+  }
+
+  useEffect(()=>{
+    getEmployes()
   },[])
 
   return(
@@ -54,7 +57,7 @@ const index: FC = () => {
       </div>
       <div className='div-container-forms'>
         <InputSearch value={inputValue} setValue={setInputValue} onChangue={handleChangue}/>
-        <FormEmployes/>
+        <FormEmployes userName={userName} onClick={getEmployes}/>
       </div>
     </div>
   )
