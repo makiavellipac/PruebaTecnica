@@ -30,7 +30,12 @@ const FormEmployes = () =>{
   })
 
   const handleChangue =({currentTarget}:ChangeEvent<HTMLInputElement>)=>{
-    setForms({...forms,[currentTarget.name]:currentTarget.value})
+    if(currentTarget.value.length>30){
+      setForms({...forms,[currentTarget.name]:currentTarget.value.slice(0,30)})
+    }
+    else{
+      setForms({...forms,[currentTarget.name]:currentTarget.value})
+    }
   }
 
   const classes=useStyles()
